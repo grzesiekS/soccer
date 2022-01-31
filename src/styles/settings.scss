@@ -4,3 +4,18 @@ $main-font : 'Montserrat', sans-serif;
 
 // COLORS
 $antiFlashWhite: #f1f2f6;
+$black: #000;
+$white: #fff;
+$limeSoap: #abe6be;
+$ufoGreen: #2ed573;
+
+//MAIN - Settings
+$backgroundColor: $antiFlashWhite;
+
+//HEADER - Settings
+$header_backgroundColor: $white;
+$header_shadowBox_color: $ufoGreen;
+
+//LOGO - Settings
+$logo_text_color: $black;
+$logo_background_gradient: linear-gradient(to right, $limeSoap 20%, $ufoGreen 40%, $ufoGreen 60%, $limeSoap 80%);

@@ -1,0 +1,14 @@
+@import "../../../styles/settings.scss";
+@import "../../../styles//animations.scss";
+
+.logo {
+  font-size: 3rem;
+  display: inline-block;
+  text-transform: uppercase;
+  background: $logo_background_gradient;
+  background-size: 200% auto;
+  color: $logo_text_color;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 1.5s linear infinite;
+}
