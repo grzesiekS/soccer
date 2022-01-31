@@ -1,9 +1,10 @@
 import React from 'react';
 
+import './styles/global.scss';
+import MainPage from './views/MainPage';
+
 const App = () => (
-  <div>
-    <h1>Hello World!</h1>
-  </div>
+  <MainPage />
 );
 
 export default App;
