@@ -1,0 +1,15 @@
+@import "../../../../styles/settings.scss";
+
+.container {
+  margin: 0 0.8em;
+}
+
+.name {
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  color: $player_name_color;
+  text-shadow: -1px -1px 0 $player_name_text-shadow_color,
+              1px -1px 0 $player_name_text-shadow_color,
+              -1px 1px 0 $player_name_text-shadow_color,
+              1px 1px 0 $player_name_text-shadow_color;
+}
