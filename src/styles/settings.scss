@@ -23,6 +23,10 @@ $logo_background_gradient: linear-gradient(to right, $limeSoap 20%, $ufoGreen 40
 //SCOREBOARD - Settings
 $scoreBoard_background_color: $white;
 
-//PLAYER - Settings
-$player_name_color: $ufoGreen;
-$player_name_text-shadow_color: $black;
+  //PLAYER - Settings
+  $player_name_color: $ufoGreen;
+  $player_name_text-shadow_color: $black;
+
+  //SCORE - Settings
+  $score_score_color: $ufoGreen;
+  $score_score_text-shadow_color: $black;

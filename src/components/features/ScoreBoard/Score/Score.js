@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './Score.module.scss';
 
 const Score = ({ playerOneScore, playerTwoScore }) => (
-  <div className={styles.scoreSection}>
+  <div className={styles.container}>
     <h2 className={styles.score}>{`${playerOneScore} - ${playerTwoScore}`}</h2>
   </div>
 );
