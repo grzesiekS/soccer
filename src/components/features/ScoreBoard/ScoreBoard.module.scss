@@ -1,0 +1,14 @@
+@import "../../../styles/settings.scss";
+
+.container {
+  display: inline-block;
+  background-color: $scoreBoard_background_color;
+  padding: 2em;
+  margin: 1.8em;
+  border-radius: 1em;
+  box-shadow: 0 0.07em 0.6em $header_shadowBox_color;
+}
+
+.playerSection {
+  display: flex;
+}

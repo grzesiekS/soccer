@@ -6,8 +6,10 @@ import styles from './ScoreBoard.module.scss';
 
 const ScoreBoard = () => (
   <div className={styles.container}>
-    <Player name='Player1'/>
-    <Player name='Player2'/>
+    <div className={styles.playerSection}>
+      <Player name='Player1'/>
+      <Player name='Player2'/>
+    </div>
     <Score playerOneScore={3} playerTwoScore={4}/>
   </div>
 );
