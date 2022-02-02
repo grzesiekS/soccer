@@ -8,6 +8,7 @@ $black: #000;
 $white: #fff;
 $limeSoap: #abe6be;
 $ufoGreen: #2ed573;
+$fluorescentRed: #ff5252;
 
 //MAIN - Settings
 $backgroundColor: $antiFlashWhite;
@@ -30,3 +31,14 @@ $scoreBoard_background_color: $white;
   //SCORE - Settings
   $score_score_color: $ufoGreen;
   $score_score_text-shadow_color: $black;
+
+//SOCCER FIELD - Settings
+$soccerField_background_color: $ufoGreen;
+$soccerField_border_color: $white;
+$soccerField_shadowBox_color: $ufoGreen;
+$soccerField_after_background_color: $white;
+$soccerField_before_border_color: $white;
+
+  //ACTION POINTS - Settings
+  $actionPoints_point_hover_backgroundColor: $fluorescentRed;
+  $actionPoints_point_border_color: $white;
