@@ -8,7 +8,9 @@ import {GameContext} from '../../../../ContextAPI/GameContext';
 
 const SoccerField = () => {
 
-  const [soccerFieldSize] = useContext(GameContext).soccerFieldSize;
+  const {soccerFieldSizeContext} = useContext(GameContext);
+
+  const [soccerFieldSize] = soccerFieldSizeContext;
 
   const pointsCreatorHelper = () => {
     const points = [];

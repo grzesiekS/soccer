@@ -33,3 +33,12 @@
     margin-top: 0;
   }
 }
+
+.ball {
+  background-color: black;
+
+  &:hover {
+    cursor: default;
+    background-color: black;
+  }
+}

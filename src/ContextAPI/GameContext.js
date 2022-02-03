@@ -5,9 +5,11 @@ export const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
   const [soccerFieldSize, setSoccerFieldSize] = useState([7, 9]);
+  const [ballPosition, setBallPosition] = useState([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]);
 
   const value = {
-    soccerFieldSize: [soccerFieldSize, setSoccerFieldSize],
+    soccerFieldSizeContext: [soccerFieldSize, setSoccerFieldSize],
+    ballPositionContext: [ballPosition, setBallPosition],
   };
 
   return (
