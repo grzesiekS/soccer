@@ -22,7 +22,7 @@ export const GameProvider = ({ children }) => {
   const [gameMoves, setGameMoves] = useState([]);
   const [playerOne, setPlayerOne] = useState(playerOneData);
   const [playerTwo, setPlayerTwo] = useState(playerTwoData);
-  const [playerTurn, setPlayerTurn] = useState(playerOne.playerOneName);
+  const [playerTurn, setPlayerTurn] = useState(playerOne.Name);
 
   const value = {
     soccerFieldSizeContext: [soccerFieldSize, setSoccerFieldSize],

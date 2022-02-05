@@ -28,7 +28,7 @@ const ActionPoints = ({ columns }) => {
     setGameMoves(prevGameMoves => [...prevGameMoves, [ballPosition, positionCoordinates]]);
     if(playerTurn === playerOne.Name) {
       setPlayerTurn(playerTwo.Name);
-      setPlayerTwo(prevData => (
+      setPlayerOne(prevData => (
         {
           ...prevData,
           Moves: [...prevData.Moves, [ballPosition, positionCoordinates]],
@@ -36,7 +36,7 @@ const ActionPoints = ({ columns }) => {
       ));
     } else {
       setPlayerTurn(playerOne.Name);
-      setPlayerOne(prevData => (
+      setPlayerTwo(prevData => (
         {
           ...prevData,
           Moves: [...prevData.Moves, [ballPosition, positionCoordinates]],
