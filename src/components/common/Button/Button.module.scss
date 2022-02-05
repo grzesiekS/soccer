@@ -1,0 +1,20 @@
+@import "../../../styles/settings.scss";
+
+.button {
+  display: inline-block;
+  background-color: $button_backGround_color;
+  border: 2px solid $button_border_color;
+  border-radius: 10px;
+  transition: 0.5s all;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 0.4em $button_boxShadow_hover_color;
+  }
+}
+
+.description {
+  font-weight: 700;
+  margin: 0.6em;
+  color: $button_description_color;
+}

@@ -24,6 +24,24 @@ export const GameProvider = ({ children }) => {
   const [playerTwo, setPlayerTwo] = useState(playerTwoData);
   const [playerTurn, setPlayerTurn] = useState(playerOne.Name);
 
+  const newGame = event => {
+    event.preventDefault();
+    setBallPosition([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]);
+    setGameMoves([]);
+    setPlayerTurn(playerOne.Name);
+    setPlayerOne(prevData => ({
+      ...prevData,
+      Score: 0,
+      Moves: [],
+    }));
+    setPlayerTwo(prevData => ({
+      ...prevData,
+      Score: 0,
+      Moves: [],
+    }));
+  };
+
+
   const value = {
     soccerFieldSizeContext: [soccerFieldSize, setSoccerFieldSize],
     ballPositionContext: [ballPosition, setBallPosition],
@@ -31,6 +49,7 @@ export const GameProvider = ({ children }) => {
     playerOneContext: [playerOne, setPlayerOne],
     playerTwoContext: [playerTwo, setPlayerTwo],
     playerTurnContext: [playerTurn, setPlayerTurn],
+    newGameFunc: event => newGame(event),
   };
 
   return (
