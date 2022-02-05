@@ -9,10 +9,11 @@ import {GameContext} from '../../../../ContextAPI/GameContext';
 
 const SoccerField = () => {
 
-  const {soccerFieldSizeContext, gameMovesContext} = useContext(GameContext);
+  const {soccerFieldSizeContext, playerOneContext, playerTwoContext} = useContext(GameContext);
 
   const [soccerFieldSize] = soccerFieldSizeContext;
-  const [gameMoves] = gameMovesContext;
+  const [playerOne] = playerOneContext;
+  const [playerTwo] = playerTwoContext;
 
   const pointsCreatorHelper = () => {
     const points = [];
@@ -33,8 +34,11 @@ const SoccerField = () => {
       {pointsCreatorHelper().map(point => (
         <ActionPoints key={point.row} columns={point.columns} />
       ))}
-      {gameMoves.map(move => (
-        <LineTo key={move} from={`${move[0]}`} to={`${move[1]}`} borderWidth={3} />
+      {playerOne.Moves.map(move => (
+        <LineTo key={move} from={`${move[0]}`} to={`${move[1]}`} borderWidth={3} borderColor={'#ff5252'} />
+      ))}
+      {playerTwo.Moves.map(move => (
+        <LineTo key={move} from={`${move[0]}`} to={`${move[1]}`} borderWidth={3} borderColor={'#2980b9'} />
       ))}
     </div>
   );
