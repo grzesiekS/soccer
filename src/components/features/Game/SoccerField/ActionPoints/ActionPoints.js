@@ -48,8 +48,8 @@ const ActionPoints = ({ columns }) => {
           key={column}
           id={column}
           className={determineBallPosition(column)
-            ? clsx(styles.point, styles.ball)
-            : styles.point}
+            ? clsx(styles.point, styles.ball, `${column}`)
+            : clsx(styles.point, `${column}`)}
           onClick={() => ballPositionSetter(column)}
         />
       ))}
