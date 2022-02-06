@@ -17,7 +17,6 @@ const Goal = ({player, reversed = false }) => {
   const [soccerFieldSize] = soccerFieldSizeContext;
   const [ballPosition] = ballPositionContext;
   const [playerTurn] = playerTurnContext;
-  // eslint-disable-next-line no-unused-vars
   const [playerOne, setPlayerOne] = playerOneContext;
   const [playerTwo, setPlayerTwo] = playerTwoContext;
 
@@ -36,14 +35,17 @@ const Goal = ({player, reversed = false }) => {
 
   const ballPositionToScore = () => {
     let result = false;
-    for (const goalRange of goalFieldRange.playerOne) {
-      if(goalRange[0] === ballPosition[0] && goalRange[1] === ballPosition[1]) {
-        result = true;
+    if(player === playerOne.Name) {
+      for (const goalRange of goalFieldRange.playerTwo) {
+        if(goalRange[0] === ballPosition[0] && goalRange[1] === ballPosition[1]) {
+          result = true;
+        }
       }
-    }
-    for (const goalRange of goalFieldRange.playerTwo) {
-      if(goalRange[0] === ballPosition[0] && goalRange[1] === ballPosition[1]) {
-        result = true;
+    } else {
+      for (const goalRange of goalFieldRange.playerOne) {
+        if(goalRange[0] === ballPosition[0] && goalRange[1] === ballPosition[1]) {
+          result = true;
+        }
       }
     }
 
