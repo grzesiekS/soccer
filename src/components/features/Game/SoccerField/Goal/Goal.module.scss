@@ -9,11 +9,20 @@
   transform: translate(-50%);
 }
 
+.playerName {
+  position: absolute;
+  right: -4em;
+}
+
 .normal {
   top: -2.05em;
   border-top: 0.2em solid $goal_conatainer_border_color;
   border-left: 0.2em solid $goal_conatainer_border_color;
   border-right: 0.2em solid $goal_conatainer_border_color;
+
+  .playerName {
+    top: -1em;
+  }
 }
 
 .reversed {
@@ -25,6 +34,10 @@
   .goal {
     position: relative;
     margin-top: 0.9em;
+  }
+
+  .playerName {
+    bottom: -1em;
   }
 }
 

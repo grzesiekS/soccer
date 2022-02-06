@@ -71,6 +71,7 @@ const Goal = ({player, reversed = false }) => {
       ? clsx(styles.container, styles.reversed)
       : clsx(styles.container, styles.normal)}
     >
+      <p className={styles.playerName}>{player}</p>
       <div className={styles.goal} onClick={() => scoreGoal()}></div>
     </div>
   );
