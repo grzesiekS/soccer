@@ -34,11 +34,11 @@ const SoccerField = () => {
 
   return (
     <div className={styles.container}>
-      <Goal />
+      <Goal player={playerTwo.Name} />
       {actionPoints.map(point => (
         <ActionPoints key={point.row} columns={point.columns} />
       ))}
-      <Goal reversed={true} />
+      <Goal reversed={true} player={playerOne.Name} />
       {playerOne.Moves.map(move => (
         <LineTo key={move} from={`${move[0]}`} to={`${move[1]}`} borderWidth={3} borderColor={'#ff5252'} />
       ))}

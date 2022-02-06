@@ -41,6 +41,20 @@ export const GameProvider = ({ children }) => {
     }));
   };
 
+  const newRound = () => {
+    setBallPosition([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]);
+    setGameMoves([]);
+    setPlayerTurn(playerOne.Name);
+    setPlayerOne(prevData => ({
+      ...prevData,
+      Moves: [],
+    }));
+    setPlayerTwo(prevData => ({
+      ...prevData,
+      Moves: [],
+    }));
+  };
+
 
   const value = {
     soccerFieldSizeContext: [soccerFieldSize, setSoccerFieldSize],
@@ -50,6 +64,7 @@ export const GameProvider = ({ children }) => {
     playerTwoContext: [playerTwo, setPlayerTwo],
     playerTurnContext: [playerTurn, setPlayerTurn],
     newGameFunc: event => newGame(event),
+    newRoundFunc: () => newRound(),
   };
 
   return (
