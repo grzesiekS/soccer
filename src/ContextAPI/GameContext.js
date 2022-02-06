@@ -17,7 +17,7 @@ export const GameProvider = ({ children }) => {
     Score: 0,
   };
 
-  const [soccerFieldSize, setSoccerFieldSize] = useState([7, 9]);
+  const [soccerFieldSize, setSoccerFieldSize] = useState([9, 13]);
   const [ballPosition, setBallPosition] = useState([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]);
   const [gameMoves, setGameMoves] = useState([]);
   const [playerOne, setPlayerOne] = useState(playerOneData);

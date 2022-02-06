@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import LineTo from 'react-lineto';
 
 import styles from './SoccerField.module.scss';
 import ActionPoints from './ActionPoints/ActionPoints';
+import Goal from './Goal/Goal';
 
 import {GameContext} from '../../../../ContextAPI/GameContext';
 
@@ -29,11 +30,15 @@ const SoccerField = () => {
     return points;
   };
 
+  const [actionPoints] = useState(pointsCreatorHelper());
+
   return (
     <div className={styles.container}>
-      {pointsCreatorHelper().map(point => (
+      <Goal />
+      {actionPoints.map(point => (
         <ActionPoints key={point.row} columns={point.columns} />
       ))}
+      <Goal reversed={true} />
       {playerOne.Moves.map(move => (
         <LineTo key={move} from={`${move[0]}`} to={`${move[1]}`} borderWidth={3} borderColor={'#ff5252'} />
       ))}

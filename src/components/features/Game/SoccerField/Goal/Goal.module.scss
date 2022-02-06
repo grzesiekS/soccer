@@ -1,0 +1,44 @@
+@import "../../../../../styles/settings.scss";
+
+.container {
+  position: absolute;
+  width: 7.5em;
+  height: 2em;
+  background-color: $goal_container_background_color;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.normal {
+  top: -2em;
+  border-top: 0.2em solid $goal_conatainer_border_color;
+  border-left: 0.2em solid $goal_conatainer_border_color;
+  border-right: 0.2em solid $goal_conatainer_border_color;
+}
+
+.reversed {
+  bottom: -2em;
+  border-left: 0.2em solid $goal_conatainer_border_color;
+  border-right: 0.2em solid $goal_conatainer_border_color;
+  border-bottom: 0.2em solid $goal_conatainer_border_color;
+
+  .goal {
+    position: relative;
+    margin-top: 0.9em;
+  }
+}
+
+.goal {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 0.05em solid $goal_goal_border_color;
+  transition: all 1s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $goal_goal_hover_color;
+  }
+}
