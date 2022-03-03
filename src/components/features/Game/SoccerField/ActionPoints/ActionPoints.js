@@ -27,7 +27,7 @@ const ActionPoints = ({ columns }) => {
   const setMovesForGamesAndPlayers = positionCoordinates => {
     setGameMoves(prevGameMoves => [...prevGameMoves, [ballPosition, positionCoordinates]]);
     if(playerTurn === playerOne.Name) {
-      setPlayerTurn(playerTwo.Name);
+      !checkIfPlayerMoveContainsPosition(playerOne.Moves, positionCoordinates) && setPlayerTurn(playerTwo.Name);
       setPlayerOne(prevData => (
         {
           ...prevData,
@@ -35,7 +35,7 @@ const ActionPoints = ({ columns }) => {
         }
       ));
     } else {
-      setPlayerTurn(playerOne.Name);
+      !checkIfPlayerMoveContainsPosition(playerTwo.Moves, positionCoordinates) && setPlayerTurn(playerOne.Name);
       setPlayerTwo(prevData => (
         {
           ...prevData,
@@ -44,6 +44,10 @@ const ActionPoints = ({ columns }) => {
       ));
     }
   };
+
+  const checkIfPlayerMoveContainsPosition = (playerMoves, positionCoordinates) => (
+    playerMoves.filter(move => move[0] === positionCoordinates || move[1] === positionCoordinates).length > 0
+  );
 
   const ballPositionSetter = positionCoordinates => {
     if((positionCoordinates[0] >= ballPosition[0] - 1
