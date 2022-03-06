@@ -23,6 +23,7 @@ export const GameProvider = ({ children }) => {
   const [playerOne, setPlayerOne] = useState(playerOneData);
   const [playerTwo, setPlayerTwo] = useState(playerTwoData);
   const [playerTurn, setPlayerTurn] = useState(playerOne.Name);
+  const [edge, setEdge] = useState('none');
 
   const newGame = event => {
     event.preventDefault();
@@ -65,6 +66,7 @@ export const GameProvider = ({ children }) => {
     playerTurnContext: [playerTurn, setPlayerTurn],
     newGameFunc: event => newGame(event),
     newRoundFunc: () => newRound(),
+    edgeContext: [edge, setEdge],
   };
 
   return (

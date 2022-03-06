@@ -36,7 +36,7 @@ const SoccerField = () => {
     <div className={styles.container}>
       <Goal player={playerTwo.Name} />
       {actionPoints.map(point => (
-        <ActionPoints key={point.row} columns={point.columns} />
+        <ActionPoints key={point.row} columns={point.columns} maxRow={actionPoints.length - 1}/>
       ))}
       <Goal reversed={true} player={playerOne.Name} />
       {playerOne.Moves.map(move => (
