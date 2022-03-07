@@ -40,6 +40,7 @@ export const GameProvider = ({ children }) => {
       Score: 0,
       Moves: [],
     }));
+    setEdge('none');
   };
 
   const newRound = () => {
@@ -54,6 +55,7 @@ export const GameProvider = ({ children }) => {
       ...prevData,
       Moves: [],
     }));
+    setEdge('none');
   };
 
 

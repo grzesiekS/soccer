@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -7,7 +7,7 @@ import styles from './ActionPoints.module.scss';
 import {GameContext} from '../../../../../ContextAPI/GameContext';
 
 const ActionPoints = ({ columns, maxRow }) => {
-  const {ballPositionContext, gameMovesContext, playerTurnContext, playerOneContext, playerTwoContext, edgeContext} = useContext(GameContext);
+  const {ballPositionContext, gameMovesContext, playerTurnContext, playerOneContext, playerTwoContext, edgeContext, newRoundFunc} = useContext(GameContext);
 
   const [ballPosition, setBallPosition] = ballPositionContext;
   const [gameMoves, setGameMoves] = gameMovesContext;
@@ -15,6 +15,26 @@ const ActionPoints = ({ columns, maxRow }) => {
   const [playerOne, setPlayerOne] = playerOneContext;
   const [playerTwo, setPlayerTwo] = playerTwoContext;
   const [edge, setEdge] = edgeContext;
+
+  const scoreGoal = React.useCallback(() => {
+    if(playerTurn === playerOne.Name && ballPosition[0] === 0 && ballPosition[1] === (columns.length - 1)/2) {
+      setPlayerOne(prevData => ({
+        ...prevData,
+        Score: prevData.Score++,
+      }));
+      newRoundFunc();
+    } else if(playerTurn === playerTwo.Name && ballPosition[0] === (maxRow) && ballPosition[1] === (columns.length - 1)/2) {
+      setPlayerTwo(prevData => ({
+        ...prevData,
+        Score: prevData.Score++,
+      }));
+      newRoundFunc();
+    }
+  },[ballPosition, columns.length, maxRow, playerOne.Name, playerTurn, playerTwo.Name, setPlayerOne, setPlayerTwo, newRoundFunc]);
+
+  useEffect(() => {
+    scoreGoal();
+  }, [ballPosition, scoreGoal]);
 
   const determineBallPosition = (actionPoint) => {
     if(ballPosition[0] === actionPoint[0]
