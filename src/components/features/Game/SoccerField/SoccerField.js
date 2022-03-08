@@ -1,6 +1,9 @@
 import React, {useContext, useState} from 'react';
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import LineTo from 'react-lineto';
+
+import {getSoccerFieldSize} from '../../../../redux/fieldSizeAndBallPositionRedux';
 
 import styles from './SoccerField.module.scss';
 import ActionPoints from './ActionPoints/ActionPoints';
@@ -10,9 +13,9 @@ import {GameContext} from '../../../../ContextAPI/GameContext';
 
 const SoccerField = () => {
 
-  const {soccerFieldSizeContext, playerOneContext, playerTwoContext} = useContext(GameContext);
+  const {playerOneContext, playerTwoContext} = useContext(GameContext);
 
-  const [soccerFieldSize] = soccerFieldSizeContext;
+  const soccerFieldSize = useSelector(getSoccerFieldSize);
   const [playerOne] = playerOneContext;
   const [playerTwo] = playerTwoContext;
 

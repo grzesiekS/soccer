@@ -1,5 +1,8 @@
 import React, {useState, createContext} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { getSoccerFieldSize, setBallPositionData } from '../redux/fieldSizeAndBallPositionRedux';
 
 export const GameContext = createContext();
 
@@ -17,8 +20,9 @@ export const GameProvider = ({ children }) => {
     Score: 0,
   };
 
-  const [soccerFieldSize, setSoccerFieldSize] = useState([9, 13]);
-  const [ballPosition, setBallPosition] = useState([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]);
+  const dispatch = useDispatch();
+
+  const soccerFieldSize = useSelector(getSoccerFieldSize);
   const [gameMoves, setGameMoves] = useState([]);
   const [playerOne, setPlayerOne] = useState(playerOneData);
   const [playerTwo, setPlayerTwo] = useState(playerTwoData);
@@ -27,7 +31,7 @@ export const GameProvider = ({ children }) => {
 
   const newGame = event => {
     event.preventDefault();
-    setBallPosition([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]);
+    dispatch(setBallPositionData([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]));
     setGameMoves([]);
     setPlayerTurn(playerOne.Name);
     setPlayerOne(prevData => ({
@@ -44,7 +48,7 @@ export const GameProvider = ({ children }) => {
   };
 
   const newRound = () => {
-    setBallPosition([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]);
+    dispatch(setBallPositionData([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]));
     setGameMoves([]);
     setPlayerTurn(playerOne.Name);
     setPlayerOne(prevData => ({
@@ -60,8 +64,7 @@ export const GameProvider = ({ children }) => {
 
 
   const value = {
-    soccerFieldSizeContext: [soccerFieldSize, setSoccerFieldSize],
-    ballPositionContext: [ballPosition, setBallPosition],
+    soccerFieldSizeContext: [soccerFieldSize],
     gameMovesContext: [gameMoves, setGameMoves],
     playerOneContext: [playerOne, setPlayerOne],
     playerTwoContext: [playerTwo, setPlayerTwo],

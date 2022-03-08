@@ -3,15 +3,20 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import playersData from './data/players.json';
+import soccerFieldAndBallPositionData from './data/fieldSizeAndBallPosition.json';
 
 import globalReducer from './globalRedux';
+import fieldSizeAndBallPositionReducer from './fieldSizeAndBallPositionRedux';
 
 const initialState = {
   players: playersData,
+  fieldSizeAndBallPosition: soccerFieldAndBallPositionData,
 };
 
 // define reducers
-const reducers = {};
+const reducers = {
+  fieldSizeAndBallPosition: fieldSizeAndBallPositionReducer,
+};
 
 // add blank reducers for initial state properties without reducers
 Object.keys(initialState).forEach(item => {

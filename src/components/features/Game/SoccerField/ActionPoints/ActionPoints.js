@@ -1,20 +1,28 @@
 import React, {useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {useSelector, useDispatch} from 'react-redux';
 import clsx from 'clsx';
+
+import {getBallPosition, setBallPositionData} from '../../../../../redux/fieldSizeAndBallPositionRedux';
 
 import styles from './ActionPoints.module.scss';
 
 import {GameContext} from '../../../../../ContextAPI/GameContext';
 
 const ActionPoints = ({ columns, maxRow }) => {
-  const {ballPositionContext, gameMovesContext, playerTurnContext, playerOneContext, playerTwoContext, edgeContext, newRoundFunc} = useContext(GameContext);
+  const {gameMovesContext, playerTurnContext, playerOneContext, playerTwoContext, edgeContext, newRoundFunc} = useContext(GameContext);
+  const dispatch = useDispatch();
+  const ballPosition = useSelector(getBallPosition);
 
-  const [ballPosition, setBallPosition] = ballPositionContext;
   const [gameMoves, setGameMoves] = gameMovesContext;
   const [playerTurn, setPlayerTurn] = playerTurnContext;
   const [playerOne, setPlayerOne] = playerOneContext;
   const [playerTwo, setPlayerTwo] = playerTwoContext;
   const [edge, setEdge] = edgeContext;
+
+  const setBallPosition = ballPosition => {
+    dispatch(setBallPositionData(ballPosition));
+  };
 
   const scoreGoal = React.useCallback(() => {
     if(playerTurn === playerOne.Name && ballPosition[0] === 0 && ballPosition[1] === (columns.length - 1)/2) {
