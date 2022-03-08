@@ -1,0 +1,12 @@
+{
+  "playerOneData": {
+    "Name": "Player1",
+    "Moves": [],
+    "Score": 0
+  },
+  "playerTwoData": {
+    "Name": "Player2",
+    "Moves": [],
+    "Score": 0
+  }
+}
