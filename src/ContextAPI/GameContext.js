@@ -2,7 +2,7 @@ import React, {useState, createContext} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getSoccerFieldSize, setBallPositionData } from '../redux/fieldSizeAndBallPositionRedux';
+import { getSoccerFieldSize, setBallPositionData, setEdgeState } from '../redux/fieldSizeAndBallPositionRedux';
 import { resetGameMovesData } from '../redux/gameMovesRedux';
 
 export const GameContext = createContext();
@@ -27,7 +27,6 @@ export const GameProvider = ({ children }) => {
   const [playerOne, setPlayerOne] = useState(playerOneData);
   const [playerTwo, setPlayerTwo] = useState(playerTwoData);
   const [playerTurn, setPlayerTurn] = useState(playerOne.Name);
-  const [edge, setEdge] = useState('none');
 
   const newGame = event => {
     event.preventDefault();
@@ -44,7 +43,7 @@ export const GameProvider = ({ children }) => {
       Score: 0,
       Moves: [],
     }));
-    setEdge('none');
+    dispatch(setEdgeState('none'));
   };
 
   const newRound = () => {
@@ -59,7 +58,7 @@ export const GameProvider = ({ children }) => {
       ...prevData,
       Moves: [],
     }));
-    setEdge('none');
+    dispatch(setEdgeState('none'));
   };
 
 
@@ -69,7 +68,6 @@ export const GameProvider = ({ children }) => {
     playerTurnContext: [playerTurn, setPlayerTurn],
     newGameFunc: event => newGame(event),
     newRoundFunc: () => newRound(),
-    edgeContext: [edge, setEdge],
   };
 
   return (

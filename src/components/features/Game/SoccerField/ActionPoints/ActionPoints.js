@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
 import clsx from 'clsx';
 
-import {getBallPosition, setBallPositionData} from '../../../../../redux/fieldSizeAndBallPositionRedux';
+import
+{ getBallPosition,
+  setBallPositionData,
+  getEdgeState,
+  setEdgeState } from '../../../../../redux/fieldSizeAndBallPositionRedux';
 import {getGameMoves, setGameMovesData} from '../../../../../redux/gameMovesRedux';
 
 import styles from './ActionPoints.module.scss';
@@ -11,16 +15,16 @@ import styles from './ActionPoints.module.scss';
 import {GameContext} from '../../../../../ContextAPI/GameContext';
 
 const ActionPoints = ({ columns, maxRow }) => {
-  const {playerTurnContext, playerOneContext, playerTwoContext, edgeContext, newRoundFunc} = useContext(GameContext);
+  const {playerTurnContext, playerOneContext, playerTwoContext, newRoundFunc} = useContext(GameContext);
   const dispatch = useDispatch();
 
   const ballPosition = useSelector(getBallPosition);
   const gameMoves = useSelector(getGameMoves);
+  const edge = useSelector(getEdgeState);
 
   const [playerTurn, setPlayerTurn] = playerTurnContext;
   const [playerOne, setPlayerOne] = playerOneContext;
   const [playerTwo, setPlayerTwo] = playerTwoContext;
-  const [edge, setEdge] = edgeContext;
 
   const setBallPosition = ballPosition => {
     dispatch(setBallPositionData(ballPosition));
@@ -95,15 +99,15 @@ const ActionPoints = ({ columns, maxRow }) => {
 
   const setEdgeBasedOnTheBallPosition = positionCoordinates => {
     if(checkIfBallPositionOnTop(positionCoordinates)) {
-      setEdge('Top');
+      dispatch(setEdgeState('Top'));
     } else if(checkIfBallPositionOnLeft(positionCoordinates)) {
-      setEdge('Left');
+      dispatch(setEdgeState('Left'));
     } else if(checkIfBallPositionOnRight(positionCoordinates)) {
-      setEdge('Right');
+      dispatch(setEdgeState('Right'));
     } else if(checkIfBallPositionOnBottom(positionCoordinates)) {
-      setEdge('Bottom');
+      dispatch(setEdgeState('Bottom'));
     } else {
-      setEdge('none');
+      dispatch(setEdgeState('none'));
     }
 
   };

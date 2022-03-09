@@ -1,4 +1,5 @@
 {
   "soccerFieldSize": [9, 13],
-  "ballPosition": []
+  "ballPosition": [],
+  "edgeState": "none"
 }
