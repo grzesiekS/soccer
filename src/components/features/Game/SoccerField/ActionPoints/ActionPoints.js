@@ -4,17 +4,19 @@ import {useSelector, useDispatch} from 'react-redux';
 import clsx from 'clsx';
 
 import {getBallPosition, setBallPositionData} from '../../../../../redux/fieldSizeAndBallPositionRedux';
+import {getGameMoves, setGameMovesData} from '../../../../../redux/gameMovesRedux';
 
 import styles from './ActionPoints.module.scss';
 
 import {GameContext} from '../../../../../ContextAPI/GameContext';
 
 const ActionPoints = ({ columns, maxRow }) => {
-  const {gameMovesContext, playerTurnContext, playerOneContext, playerTwoContext, edgeContext, newRoundFunc} = useContext(GameContext);
+  const {playerTurnContext, playerOneContext, playerTwoContext, edgeContext, newRoundFunc} = useContext(GameContext);
   const dispatch = useDispatch();
-  const ballPosition = useSelector(getBallPosition);
 
-  const [gameMoves, setGameMoves] = gameMovesContext;
+  const ballPosition = useSelector(getBallPosition);
+  const gameMoves = useSelector(getGameMoves);
+
   const [playerTurn, setPlayerTurn] = playerTurnContext;
   const [playerOne, setPlayerOne] = playerOneContext;
   const [playerTwo, setPlayerTwo] = playerTwoContext;
@@ -53,7 +55,7 @@ const ActionPoints = ({ columns, maxRow }) => {
   };
 
   const setMovesForGamesAndPlayers = positionCoordinates => {
-    setGameMoves(prevGameMoves => [...prevGameMoves, [ballPosition, positionCoordinates]]);
+    dispatch(setGameMovesData([ballPosition, positionCoordinates]));
     if(playerTurn === playerOne.Name) {
       (!checkIfPlayerMoveContainsPosition(playerOne.Moves, positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
       && setPlayerTurn(playerTwo.Name);

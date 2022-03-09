@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { getSoccerFieldSize, setBallPositionData } from '../redux/fieldSizeAndBallPositionRedux';
+import { resetGameMovesData } from '../redux/gameMovesRedux';
 
 export const GameContext = createContext();
 
@@ -23,7 +24,6 @@ export const GameProvider = ({ children }) => {
   const dispatch = useDispatch();
 
   const soccerFieldSize = useSelector(getSoccerFieldSize);
-  const [gameMoves, setGameMoves] = useState([]);
   const [playerOne, setPlayerOne] = useState(playerOneData);
   const [playerTwo, setPlayerTwo] = useState(playerTwoData);
   const [playerTurn, setPlayerTurn] = useState(playerOne.Name);
@@ -32,7 +32,7 @@ export const GameProvider = ({ children }) => {
   const newGame = event => {
     event.preventDefault();
     dispatch(setBallPositionData([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]));
-    setGameMoves([]);
+    dispatch(resetGameMovesData());
     setPlayerTurn(playerOne.Name);
     setPlayerOne(prevData => ({
       ...prevData,
@@ -49,7 +49,7 @@ export const GameProvider = ({ children }) => {
 
   const newRound = () => {
     dispatch(setBallPositionData([Math.round((soccerFieldSize[1] - 1)/2), Math.round((soccerFieldSize[0] - 1)/2)]));
-    setGameMoves([]);
+    dispatch(resetGameMovesData());
     setPlayerTurn(playerOne.Name);
     setPlayerOne(prevData => ({
       ...prevData,
@@ -64,8 +64,6 @@ export const GameProvider = ({ children }) => {
 
 
   const value = {
-    soccerFieldSizeContext: [soccerFieldSize],
-    gameMovesContext: [gameMoves, setGameMoves],
     playerOneContext: [playerOne, setPlayerOne],
     playerTwoContext: [playerTwo, setPlayerTwo],
     playerTurnContext: [playerTurn, setPlayerTurn],
