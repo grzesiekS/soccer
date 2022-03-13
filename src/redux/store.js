@@ -8,6 +8,7 @@ import soccerFieldAndBallPositionData from './data/fieldSizeAndBallPosition.json
 import globalReducer from './globalRedux';
 import fieldSizeAndBallPositionReducer from './fieldSizeAndBallPositionRedux';
 import gameMovesReducer from './gameMovesRedux';
+import playersReducer from './playersRedux';
 
 const initialState = {
   players: playersData,
@@ -19,6 +20,7 @@ const initialState = {
 const reducers = {
   fieldSizeAndBallPosition: fieldSizeAndBallPositionReducer,
   gameMoves: gameMovesReducer,
+  players: playersReducer,
 };
 
 // add blank reducers for initial state properties without reducers

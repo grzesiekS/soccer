@@ -8,5 +8,6 @@
     "Name": "Player2",
     "Moves": [],
     "Score": 0
-  }
+  },
+  "playerTurn": "Player1"
 }

@@ -1,23 +1,20 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import LineTo from 'react-lineto';
 
 import {getSoccerFieldSize} from '../../../../redux/fieldSizeAndBallPositionRedux';
+import {getPlayerOne, getPlayerTwo} from '../../../../redux/playersRedux';
 
 import styles from './SoccerField.module.scss';
 import ActionPoints from './ActionPoints/ActionPoints';
 import Goal from './Goal/Goal';
 
-import {GameContext} from '../../../../ContextAPI/GameContext';
-
 const SoccerField = () => {
 
-  const {playerOneContext, playerTwoContext} = useContext(GameContext);
-
   const soccerFieldSize = useSelector(getSoccerFieldSize);
-  const [playerOne] = playerOneContext;
-  const [playerTwo] = playerTwoContext;
+  const playerOne = useSelector(getPlayerOne);
+  const playerTwo = useSelector(getPlayerTwo);
 
   const pointsCreatorHelper = () => {
     const points = [];

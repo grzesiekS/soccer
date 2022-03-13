@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
 import clsx from 'clsx';
@@ -9,46 +9,57 @@ import
   getEdgeState,
   setEdgeState } from '../../../../../redux/fieldSizeAndBallPositionRedux';
 import {getGameMoves, setGameMovesData} from '../../../../../redux/gameMovesRedux';
+import {getPlayerOne,
+  getPlayerTurn,
+  getPlayerTwo,
+  setPlayerOneMoves,
+  setPlayerTwoMoves,
+  setPlayerTurn,
+  playerOneScore,
+  setPlayerTwoScore} from '../../../../../redux/playersRedux';
 
 import styles from './ActionPoints.module.scss';
 
 import {GameContext} from '../../../../../ContextAPI/GameContext';
 
 const ActionPoints = ({ columns, maxRow }) => {
-  const {playerTurnContext, playerOneContext, playerTwoContext, newRoundFunc} = useContext(GameContext);
+  const {newRoundFunc} = useContext(GameContext);
   const dispatch = useDispatch();
+
+  const [playerOneGoal, setplayerOneGoal] = useState(false);
+  const [playerTwoGoal, setPlayerTwoGoal] = useState(false);
 
   const ballPosition = useSelector(getBallPosition);
   const gameMoves = useSelector(getGameMoves);
   const edge = useSelector(getEdgeState);
-
-  const [playerTurn, setPlayerTurn] = playerTurnContext;
-  const [playerOne, setPlayerOne] = playerOneContext;
-  const [playerTwo, setPlayerTwo] = playerTwoContext;
+  const playerOne = useSelector(getPlayerOne);
+  const playerTwo = useSelector(getPlayerTwo);
+  const playerTurn = useSelector(getPlayerTurn);
 
   const setBallPosition = ballPosition => {
     dispatch(setBallPositionData(ballPosition));
   };
 
-  const scoreGoal = React.useCallback(() => {
-    if(playerTurn === playerOne.Name && ballPosition[0] === 0 && ballPosition[1] === (columns.length - 1)/2) {
-      setPlayerOne(prevData => ({
-        ...prevData,
-        Score: prevData.Score++,
-      }));
-      newRoundFunc();
-    } else if(playerTurn === playerTwo.Name && ballPosition[0] === (maxRow) && ballPosition[1] === (columns.length - 1)/2) {
-      setPlayerTwo(prevData => ({
-        ...prevData,
-        Score: prevData.Score++,
-      }));
-      newRoundFunc();
+  const scoreGoal = positionCoordinates => {
+    if(playerTurn === playerOne.Name && positionCoordinates[0] === 0 && positionCoordinates[1] === (columns.length - 1)/2) {
+      setplayerOneGoal(true);
+    } else if(playerTurn === playerTwo.Name && positionCoordinates[0] === (maxRow) && positionCoordinates[1] === (columns.length - 1)/2) {
+      setPlayerTwoGoal(true);
     }
-  },[ballPosition, columns.length, maxRow, playerOne.Name, playerTurn, playerTwo.Name, setPlayerOne, setPlayerTwo, newRoundFunc]);
+  };
 
   useEffect(() => {
-    scoreGoal();
-  }, [ballPosition, scoreGoal]);
+    if(playerOneGoal) {
+      dispatch(playerOneScore());
+      newRoundFunc();
+      setplayerOneGoal(false);
+    }
+    if(playerTwoGoal) {
+      dispatch(setPlayerTwoScore());
+      newRoundFunc();
+      setPlayerTwoGoal(false);
+    }
+  }, [dispatch, newRoundFunc, playerOneGoal, playerTwoGoal]);
 
   const determineBallPosition = (actionPoint) => {
     if(ballPosition[0] === actionPoint[0]
@@ -62,22 +73,12 @@ const ActionPoints = ({ columns, maxRow }) => {
     dispatch(setGameMovesData([ballPosition, positionCoordinates]));
     if(playerTurn === playerOne.Name) {
       (!checkIfPlayerMoveContainsPosition(playerOne.Moves, positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
-      && setPlayerTurn(playerTwo.Name);
-      setPlayerOne(prevData => (
-        {
-          ...prevData,
-          Moves: [...prevData.Moves, [ballPosition, positionCoordinates]],
-        }
-      ));
+      && dispatch(setPlayerTurn(playerTwo.Name));
+      dispatch(setPlayerOneMoves([ballPosition, positionCoordinates]));
     } else {
       (!checkIfPlayerMoveContainsPosition(playerTwo.Moves, positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
-      && setPlayerTurn(playerOne.Name);
-      setPlayerTwo(prevData => (
-        {
-          ...prevData,
-          Moves: [...prevData.Moves, [ballPosition, positionCoordinates]],
-        }
-      ));
+      && dispatch(setPlayerTurn(playerOne.Name));
+      dispatch(setPlayerTwoMoves([ballPosition, positionCoordinates]));
     }
   };
 
@@ -152,6 +153,7 @@ const ActionPoints = ({ columns, maxRow }) => {
       && !ballPositionInGameMovesArray(positionCoordinates)) {
       setEdgeBasedOnTheBallPosition(positionCoordinates);
       setBallPositionHelper(positionCoordinates);
+      scoreGoal(positionCoordinates);
     }
   };
 

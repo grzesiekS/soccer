@@ -1,15 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
+
+import {getPlayerTurn} from '../../../../redux/playersRedux';
 
 import styles from './Player.module.scss';
 
-import {GameContext} from '../../../../ContextAPI/GameContext';
 import clsx from 'clsx';
 
 const Player = ({ name }) => {
-  const {playerTurnContext} = useContext(GameContext);
-
-  const [playerTurn] = playerTurnContext;
+  const playerTurn = useSelector(getPlayerTurn);
 
   return (
     <div className={styles.container}>

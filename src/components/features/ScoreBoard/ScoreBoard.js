@@ -1,17 +1,20 @@
 import React, {useContext} from 'react';
+import { useSelector } from 'react-redux';
 import Player from './Player/Player';
 import Score from './Score/Score';
 import Button from '../../common/Button/Button';
+
+import {getPlayerOne, getPlayerTwo} from '../../../redux/playersRedux';
 
 import styles from './ScoreBoard.module.scss';
 
 import {GameContext} from '../../../ContextAPI/GameContext';
 
 const ScoreBoard = () => {
-  const {playerOneContext, playerTwoContext, newGameFunc} = useContext(GameContext);
+  const {newGameFunc} = useContext(GameContext);
 
-  const [playerOne] = playerOneContext;
-  const [playerTwo] = playerTwoContext;
+  const playerOne = useSelector(getPlayerOne);
+  const playerTwo = useSelector(getPlayerTwo);
 
   return(
     <div className={styles.container}>
