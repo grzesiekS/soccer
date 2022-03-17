@@ -17,6 +17,7 @@ import {getPlayerOne,
   setPlayerTurn,
   playerOneScore,
   setPlayerTwoScore} from '../../../../../redux/playersRedux';
+import {setAwsCurrentMove, setAwsDataHistory} from '../../../../../redux/awsDataRedux';
 
 import styles from './ActionPoints.module.scss';
 
@@ -72,18 +73,21 @@ const ActionPoints = ({ columns, maxRow }) => {
   const setMovesForGamesAndPlayers = positionCoordinates => {
     dispatch(setGameMovesData([ballPosition, positionCoordinates]));
     if(playerTurn === playerOne.Name) {
-      (!checkIfPlayerMoveContainsPosition(playerOne.Moves, positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
+      (!checkIfPlayerMoveContainsPosition(positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
       && dispatch(setPlayerTurn(playerTwo.Name));
       dispatch(setPlayerOneMoves([ballPosition, positionCoordinates]));
+      dispatch(setAwsCurrentMove('1'));
     } else {
-      (!checkIfPlayerMoveContainsPosition(playerTwo.Moves, positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
+      dispatch(setAwsDataHistory());
+      (!checkIfPlayerMoveContainsPosition(positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
       && dispatch(setPlayerTurn(playerOne.Name));
       dispatch(setPlayerTwoMoves([ballPosition, positionCoordinates]));
     }
   };
 
-  const checkIfPlayerMoveContainsPosition = (playerMoves, positionCoordinates) => (
-    playerMoves.filter(move => move[0] === positionCoordinates || move[1] === positionCoordinates).length > 0
+  const checkIfPlayerMoveContainsPosition = positionCoordinates => (
+    playerOne.Moves.filter(move => move[0] === positionCoordinates || move[1] === positionCoordinates).length > 0
+    || playerTwo.Moves.filter(move => move[0] === positionCoordinates || move[1] === positionCoordinates).length > 0
   );
 
   const checkIfBallPositionOnTop = positionCoordinates => (positionCoordinates[0] === 0);

@@ -4,16 +4,19 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import playersData from './data/players.json';
 import soccerFieldAndBallPositionData from './data/fieldSizeAndBallPosition.json';
+import awsData from './data/awsData.json';
 
 import globalReducer from './globalRedux';
 import fieldSizeAndBallPositionReducer from './fieldSizeAndBallPositionRedux';
 import gameMovesReducer from './gameMovesRedux';
 import playersReducer from './playersRedux';
+import awsDataReducer from './awsDataRedux';
 
 const initialState = {
   players: playersData,
   fieldSizeAndBallPosition: soccerFieldAndBallPositionData,
   gameMoves: [],
+  awsData: awsData,
 };
 
 // define reducers
@@ -21,6 +24,7 @@ const reducers = {
   fieldSizeAndBallPosition: fieldSizeAndBallPositionReducer,
   gameMoves: gameMovesReducer,
   players: playersReducer,
+  awsData: awsDataReducer,
 };
 
 // add blank reducers for initial state properties without reducers
