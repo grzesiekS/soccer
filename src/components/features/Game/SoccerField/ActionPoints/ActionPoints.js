@@ -70,13 +70,24 @@ const ActionPoints = ({ columns, maxRow }) => {
     return false;
   };
 
+  const translateToCurrentMove = positionCoordinates => {
+    if(positionCoordinates[0] < ballPosition[0] && positionCoordinates[1] === ballPosition[1]) return '1';
+    if(positionCoordinates[0] > ballPosition[0] && positionCoordinates[1] === ballPosition[1]) return '16';
+    if(positionCoordinates[0] === ballPosition[0] && positionCoordinates[1] < ballPosition[1]) return '64';
+    if(positionCoordinates[0] === ballPosition[0] && positionCoordinates[1] > ballPosition[1]) return '4';
+    if(positionCoordinates[0] < ballPosition[0] && positionCoordinates[1] < ballPosition[1]) return '128';
+    if(positionCoordinates[0] < ballPosition[0] && positionCoordinates[1] > ballPosition[1]) return '2';
+    if(positionCoordinates[0] > ballPosition[0] && positionCoordinates[1] < ballPosition[1]) return '32';
+    if(positionCoordinates[0] > ballPosition[0] && positionCoordinates[1] > ballPosition[1]) return '8';
+  };
+
   const setMovesForGamesAndPlayers = positionCoordinates => {
     dispatch(setGameMovesData([ballPosition, positionCoordinates]));
     if(playerTurn === playerOne.Name) {
       (!checkIfPlayerMoveContainsPosition(positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
       && dispatch(setPlayerTurn(playerTwo.Name));
       dispatch(setPlayerOneMoves([ballPosition, positionCoordinates]));
-      dispatch(setAwsCurrentMove('1'));
+      dispatch(setAwsCurrentMove(translateToCurrentMove(positionCoordinates)));
     } else {
       dispatch(setAwsDataHistory());
       (!checkIfPlayerMoveContainsPosition(positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))

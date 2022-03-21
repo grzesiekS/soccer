@@ -10,10 +10,12 @@ const createActionName = name => `app/${reducerName}/${name}`;
 
 // Action types
 const SET_HISTORY = createActionName('SET_HISTORY');
+const RESET_HISTORY = createActionName('RESET_HISTORY');
 const SET_CURRENT_MOVE = createActionName('SET_CURRENT_MOVE');
 
 // action creators
 export const setAwsDataHistory = payload => ({payload, type: SET_HISTORY});
+export const resetAwsDataHistory = payload => ({payload, type: RESET_HISTORY});
 export const setAwsCurrentMove = payload => ({payload, type: SET_CURRENT_MOVE});
 
 /* thunk creators */
@@ -32,8 +34,14 @@ export default function reducer(state = [], action = {}) {
     case SET_HISTORY: {
       return {
         ...state,
-        history: [...state.history, state.currentMove.split(',')],
+        history: [...state.history, [...state.currentMove.split(',')]],
         currentMove: '',
+      };
+    }
+    case RESET_HISTORY: {
+      return {
+        ...state,
+        history: [],
       };
     }
     default:
