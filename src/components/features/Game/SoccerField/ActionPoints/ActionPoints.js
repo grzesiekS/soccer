@@ -157,6 +157,7 @@ const ActionPoints = ({ columns, maxRow }) => {
       default:
         setBallPosition(positionCoordinates);
         setMovesForGamesAndPlayers(positionCoordinates);
+        scoreGoal(positionCoordinates);
     }
   };
 
@@ -168,7 +169,6 @@ const ActionPoints = ({ columns, maxRow }) => {
       && !ballPositionInGameMovesArray(positionCoordinates)) {
       setEdgeBasedOnTheBallPosition(positionCoordinates);
       setBallPositionHelper(positionCoordinates);
-      scoreGoal(positionCoordinates);
     }
   };
 

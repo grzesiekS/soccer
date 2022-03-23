@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { getSoccerFieldSize, setBallPositionData, setEdgeState } from '../redux/fieldSizeAndBallPositionRedux';
 import { resetGameMovesData } from '../redux/gameMovesRedux';
 import { getPlayerOne, resetPlayerOneMoves, setPlayerTurn, resetPlayerTwoMoves, resetPlayersData } from '../redux/playersRedux';
-import { setAwsCurrentMove, resetAwsDataHistory } from '../redux/awsDataRedux';
+import { resetAwsDataHistory, resetAwsCurrentMove } from '../redux/awsDataRedux';
 
 export const GameContext = createContext();
 
@@ -24,7 +24,7 @@ export const GameProvider = ({ children }) => {
     dispatch(setPlayerTurn(playerOne.Name));
     dispatch(resetPlayersData());
     dispatch(resetAwsDataHistory());
-    dispatch(setAwsCurrentMove(''));
+    dispatch(resetAwsCurrentMove());
   };
 
   const newRound = () => {
@@ -35,7 +35,7 @@ export const GameProvider = ({ children }) => {
     dispatch(resetPlayerTwoMoves());
     dispatch(setEdgeState('none'));
     dispatch(resetAwsDataHistory());
-    dispatch(setAwsCurrentMove(''));
+    dispatch(resetAwsCurrentMove());
   };
 
 
