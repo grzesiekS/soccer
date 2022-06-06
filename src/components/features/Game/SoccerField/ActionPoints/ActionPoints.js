@@ -17,7 +17,7 @@ import {getPlayerOne,
   setPlayerTurn,
   playerOneScore,
   setPlayerTwoScore} from '../../../../../redux/playersRedux';
-import {setAwsCurrentMove, setAwsDataHistory} from '../../../../../redux/awsDataRedux';
+import {setAwsCurrentMove, setAwsDataHistory, setAwsCurrentMoveNPC, setAwsDataHistoryNPC} from '../../../../../redux/awsDataRedux';
 
 import styles from './ActionPoints.module.scss';
 
@@ -84,6 +84,7 @@ const ActionPoints = ({ columns, maxRow }) => {
   const setMovesForGamesAndPlayers = positionCoordinates => {
     dispatch(setGameMovesData([ballPosition, positionCoordinates]));
     if(playerTurn === playerOne.Name) {
+      dispatch(setAwsDataHistoryNPC());
       (!checkIfPlayerMoveContainsPosition(positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
       && dispatch(setPlayerTurn(playerTwo.Name));
       dispatch(setPlayerOneMoves([ballPosition, positionCoordinates]));
@@ -93,6 +94,7 @@ const ActionPoints = ({ columns, maxRow }) => {
       (!checkIfPlayerMoveContainsPosition(positionCoordinates) && !checkIfBallPositionOnEdge(positionCoordinates))
       && dispatch(setPlayerTurn(playerOne.Name));
       dispatch(setPlayerTwoMoves([ballPosition, positionCoordinates]));
+      dispatch(setAwsCurrentMoveNPC(translateToCurrentMove(positionCoordinates)));
     }
   };
 

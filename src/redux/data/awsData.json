@@ -2,5 +2,6 @@
   "userName": "",
   "history": [],
   "userStarts": true,
-  "currentMove": ""
+  "currentMove": "",
+  "currentMoveNPC": ""
 }
